@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 		render(){
 			return(
 				<View>
-					<Text>{this.props.data.nome}</Text>
+					<Text>{this.props.data.brand}</Text>
 				</View>
 			);
 		}

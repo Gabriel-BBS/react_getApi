@@ -12,7 +12,7 @@ class App extends Component{
     }
   }
   async componentDidMount(){
-    const response = await api.get('r-api/?api=filmes');
+    const response = await api.get('products.json?product_tag=vegan');
     this.setState({
       filmes: response.data,
     });
