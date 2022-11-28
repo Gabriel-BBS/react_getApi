@@ -1,32 +1,32 @@
 import React,{Component} from 'react';
-import { StyleSheet, View, FlatList} from 'react-native';
+import { StyleSheet, View, FlatList,Text} from 'react-native';
 
 import api from './services/api';
-import Filmes from './filmes';
+import Personagens from './personagens';
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      filmes: []
+      personagens: []
     }
   }
   async componentDidMount(){
-    const response = await api.get('products.json?product_tag=vegan');
+    const response = await api.get('people/?format=json');
     this.setState({
-      filmes: response.data,
+      personagens: response.data.results,
     });
   }
 
   render(){
     return(
       <View style={styles.container}>
-        <FlatList
-        data={this.state.filmes}
-        keyExtractor={item => item.id.toString()}
-        renderItem={ ({item}) => <Filmes data={item} />}
-  
-        />
+          <Text style={styles.titleText}>Personagens do filme StarWars</Text>
+          <FlatList
+          data={this.state.personagens}
+          keyExtractor={item => item.name.toString()}
+          renderItem={ ({item}) => <Personagens data={item} />}
+          />
       </View>
     );
   }
@@ -41,4 +41,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin:50,
   },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
+  }
+
 });
